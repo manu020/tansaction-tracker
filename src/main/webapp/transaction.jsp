@@ -135,7 +135,7 @@
             String type=request.getParameter("transaction_type");
             float amount=Float.parseFloat(request.getParameter("transaction_amount"));
             String note=request.getParameter("transaction_note");
-         String url = "jdbc:mysql://localhost:3306/bank";
+            String url = "jdbc:mysql://localhost:3306/bank";
 
     			String uname = "root";
     			String pass = "939164";

@@ -39,7 +39,14 @@
 </head>
 <body>
     <h2 align="center">Your Transaction History</h2>
-    
+    <form action="" method="get">
+    <h2 align="left" style="color:red;background-color:white;">SORT</h2>
+   
+   <button name="sort" value="transaction_id">ID</button>
+   <button name="sort" value="transaction_amount">Amount</button>
+   <button name="sort" value="transaction_date">Date</button>
+</form>
+
     <br/>
     <table>
         <tr>
@@ -51,6 +58,8 @@
         </tr>
         <%
             try {
+            
+            	
             	String url = "jdbc:mysql://localhost:3306/bank";
 
     			String uname = "root";
@@ -84,7 +93,8 @@
         <%
                 }
                 con.close();
-            } catch (SQLException e) {
+            } 
+            catch (SQLException e) {
                 e.printStackTrace();
             }
         %>

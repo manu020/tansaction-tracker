@@ -58,6 +58,8 @@
         </tr>
         <%
             try {
+            	if (request.getMethod().equalsIgnoreCase("get")) {
+            	    String sorting = request.getParameter("sort");
             
             	
             	String url = "jdbc:mysql://localhost:3306/bank";
@@ -67,7 +69,7 @@
     			Class.forName("com.mysql.cj.jdbc.Driver");
     			Connection con = DriverManager.getConnection(url, uname, pass);
                 //Connection con = ConnectionProvider.getCon();
-                String query = "select * from transactions;";
+                String query = "select * from transactions order by "+sorting+" desc ;";
                 PreparedStatement pst = con.prepareStatement(query);
 
                 ResultSet set = pst.executeQuery();
@@ -93,7 +95,8 @@
         <%
                 }
                 con.close();
-            } 
+            }
+            }
             catch (SQLException e) {
                 e.printStackTrace();
             }

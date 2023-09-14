@@ -1,62 +1,64 @@
 <%@page import="java.sql.DriverManager"%>
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="java.sql.PreparedStatement" %>
-<%@ page import="java.sql.SQLException" %>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="dbconnection.ConnectionProvider" %>
+<%@ page import="java.time.LocalDate"%>
+<%@ page import="java.time.format.DateTimeFormatter"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.PreparedStatement"%>
+<%@ page import="java.sql.SQLException"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="dbconnection.ConnectionProvider"%>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Transaction Details</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
+<meta charset="UTF-8">
+<title>Transaction Details</title>
+<style>
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
 
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
+th, td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+}
 
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
 
-        tr:nth-child(odd) {
-            background-color: #e6f7ff;
-        }
+tr:nth-child(odd) {
+	background-color: #e6f7ff;
+}
 
-        th {
-            background-color: #007BFF;
-            color: white;
-        }
-    </style>
+th {
+	background-color: #007BFF;
+	color: white;
+}
+</style>
 </head>
 <body>
-    <h2 align="center">Your Transaction History</h2>
-    <form action="" method="get">
-    <h2 align="left" style="color:red;background-color:white;">SORT</h2>
-   
-   <button name="sort" value="transaction_id">ID</button>
-   <button name="sort" value="transaction_amount">Amount</button>
-   <button name="sort" value="transaction_date">Date</button>
-</form>
-
-    <br/>
-    <table>
-        <tr>
-            <th>Transaction ID</th>
-            <th>Transaction Date</th>
-            <th>Transaction Type</th>
-            <th>Transaction Amount</th>
-            <th>Transaction Note</th>
-        </tr>
-        <%
+	<h2 align="center">Your Transaction History</h2>
+	<h2 align="left" style="color: red; background-color: white;">SORT</h2>
+	<form action="" id="details" method="get">
+		<label style="color: blue; background-color: white;" for="details">Choose your Option:</label>
+		<select name="sort" id="details" form="details">
+			<option value="transaction_id">ID</option>
+			<option value="transaction_date">Date</option>
+			<option value="transaction_amount">Amount</option>
+		</select>
+		<input type="submit">
+	</form>
+	<br />
+	<table>
+		<tr>
+			<th>Transaction ID</th>
+			<th>Transaction Date</th>
+			<th>Transaction Type</th>
+			<th>Transaction Amount</th>
+			<th>Transaction Note</th>
+		</tr>
+		<%
             try {
             	if (request.getMethod().equalsIgnoreCase("get")) {
             	    String sorting = request.getParameter("sort");
@@ -85,14 +87,14 @@
                     float transactionAmount = set.getFloat("transaction_amount");
                     String transactionNote = set.getString("transaction_note");
         %>
-                    <tr>
-                        <td><%= transactionId %></td>
-                        <td><%= s %></td>
-                        <td><%= transactionType %></td>
-                        <td><%= transactionAmount %></td>
-                        <td><%= transactionNote != null ? transactionNote : "" %></td>
-                    </tr>
-        <%
+		<tr>
+			<td><%= transactionId %></td>
+			<td><%= s %></td>
+			<td><%= transactionType %></td>
+			<td><%= transactionAmount %></td>
+			<td><%= transactionNote != null ? transactionNote : "" %></td>
+		</tr>
+		<%
                 }
                 con.close();
             }
@@ -101,7 +103,7 @@
                 e.printStackTrace();
             }
         %>
-    </table>
-    <a class="main-button" href="home.jsp">Back To Home Page</a>   
+	</table>
+	<a class="main-button" href="home.jsp">Back To Home Page</a>
 </body>
 </html>
